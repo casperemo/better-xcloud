@@ -1,0 +1,7 @@
+{
+  "name": "mortal kombat 11",
+  "default_layout": "arcade layout",
+  "layouts": [
+    "mortal-kombat-11"
+  ]
+}
