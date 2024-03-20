@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Better xCloud
-// @namespace    https://github.com/redphx
-// @version      3.2.4
+// @name         Pro xCloud
+// @namespace    https://github.com/casperemo
+// @version      1.0
 // @description  Improve Xbox Cloud Gaming (xCloud) experience
 // @author       redphx
 // @license      MIT
@@ -9,13 +9,33 @@
 // @match        https://www.xbox.com/*/auth/msa?*loggedIn*
 // @run-at       document-start
 // @grant        none
-// @updateURL    https://raw.githubusercontent.com/redphx/better-xcloud/main/better-xcloud.meta.js
-// @downloadURL  https://github.com/redphx/better-xcloud/releases/latest/download/better-xcloud.user.js
+// @updateURL    https://raw.githubusercontent.com/casperemo/pro-xcloud/main/better-xcloud.meta.js
+// @downloadURL  https://github.com/casperemo/pro-xcloud/releases/latest/download/better-xcloud.user.js
 // ==/UserScript==
 'use strict';
+const FAKE_IP = '9.9.9.9';
+
+let bypassed = false;
+const originalFetch = window.fetch;
+
+window.fetch = async (...args) => {
+    if (bypassed) {
+        return originalFetch(...args);
+    }
+
+    const request = args[0];
+    const url = (typeof request === 'string') ? request : request.url;
+
+    if (url.endsWith('/v2/login/user')) {
+        args[0].headers.set('X-Forwarded-For', FAKE_IP);
+        bypassed = true;
+    }
+
+    return originalFetch(...args);
+}
 
 const SCRIPT_VERSION = '3.2.4';
-const SCRIPT_HOME = 'https://github.com/redphx/better-xcloud';
+const SCRIPT_HOME = 'https://github.com/casperemo/better-xcloud';
 
 const ENABLE_XCLOUD_LOGGER = false;
 const ENABLE_PRELOAD_BX_UI = false;
@@ -3960,7 +3980,7 @@ class LoadingScreen {
         LoadingScreen.#orgWebTitle && (document.title = LoadingScreen.#orgWebTitle);
         LoadingScreen.#$waitTimeBox && LoadingScreen.#$waitTimeBox.classList.add('bx-gone');
 
-        if (getPref(Preferences.UI_LOADING_SCREEN_GAME_ART) && LoadingScreen.#$bgStyle) {
+        if (LoadingScreen.#$bgStyle) {
             const $rocketBg = document.querySelector('#game-stream rect[width="800"]');
             $rocketBg && $rocketBg.addEventListener('transitionend', e => {
                 LoadingScreen.#$bgStyle.textContent += `
@@ -4091,7 +4111,7 @@ class TouchController {
             return;
         }
 
-        const baseUrl = `https://raw.githubusercontent.com/redphx/better-xcloud/gh-pages/touch-layouts${USE_DEV_TOUCH_LAYOUT ? '/dev' : ''}`;
+        const baseUrl = `https://raw.githubusercontent.com/casperemo/better-xcloud/gh-pages/touch-layouts${USE_DEV_TOUCH_LAYOUT ? '/dev' : ''}`;
         const url = `${baseUrl}/${xboxTitleId}.json`;
 
         // Get layout info
@@ -7155,14 +7175,13 @@ class Preferences {
                     }
                 }
 
-                if (hasHighCodec) {
-                    if (!hasLowCodec && !hasNormalCodec) {
-                        options.default = `${t('visual-quality-high')} (${t('default')})`;
+                if (hasLowCodec) {
+                    if (!hasNormalCodec && !hasHighCodec) {
+                        options.default = `${t('visual-quality-low')} (${t('default')})`;
                     } else {
-                        options.high = t('visual-quality-high');
+                        options.low = t('visual-quality-low');
                     }
                 }
-
                 if (hasNormalCodec) {
                     if (!hasLowCodec && !hasHighCodec) {
                         options.default = `${t('visual-quality-normal')} (${t('default')})`;
@@ -7170,12 +7189,11 @@ class Preferences {
                         options.normal = t('visual-quality-normal');
                     }
                 }
-
-                if (hasLowCodec) {
-                    if (!hasNormalCodec && !hasHighCodec) {
-                        options.default = `${t('visual-quality-low')} (${t('default')})`;
+                if (hasHighCodec) {
+                    if (!hasLowCodec && !hasNormalCodec) {
+                        options.default = `${t('visual-quality-high')} (${t('default')})`;
                     } else {
-                        options.low = t('visual-quality-low');
+                        options.high = t('visual-quality-high');
                     }
                 }
 
@@ -7218,7 +7236,6 @@ class Preferences {
             'options': {
                 'default': t('default'),
                 'all': t('tc-all-games'),
-                'off': t('off'),
             },
             'unsupported': !HAS_TOUCH_SUPPORT,
             'ready': () => {
@@ -7263,7 +7280,7 @@ class Preferences {
         [Preferences.LOCAL_CO_OP_ENABLED]: {
             'default': false,
             'note': CE('a', {
-                           href: 'https://github.com/redphx/better-xcloud/discussions/275',
+                           href: 'https://github.com/casperemo/pro-xcloud/discussions/275',
                            target: '_blank',
                        }, t('enable-local-co-op-support-note')),
         },
@@ -7317,7 +7334,7 @@ class Preferences {
                 let url;
                 if (pref.unsupported) {
                     note = t('browser-unsupported-feature');
-                    url = 'https://github.com/redphx/better-xcloud/issues/206#issuecomment-1920475657';
+                    url = 'https://github.com/casperemo/pro-xcloud/issues/206#issuecomment-1920475657';
                 } else {
                     note = t('mkb-disclaimer');
                     url = 'https://better-xcloud.github.io/mouse-and-keyboard/#disclaimer';
@@ -7396,7 +7413,6 @@ class Preferences {
             'default': '16:9',
             'options': {
                 '16:9': '16:9',
-                '18:9': '18:9',
                 '21:9': '21:9',
                 '16:10': '16:10',
                 '4:3': '4:3',
@@ -8008,11 +8024,7 @@ if (window.BX_VIBRATION_INTENSITY && window.BX_VIBRATION_INTENSITY < 1) {
                 return false;
             }
 
-            let newCode = '';
-            if (getPref(Preferences.STREAM_TOUCH_CONTROLLER) === 'off') {
-                newCode = 'return;';
-            } else {
-                newCode = `
+            const newCode = `
 const gamepads = window.navigator.getGamepads();
 let gamepadFound = false;
 
@@ -8027,7 +8039,6 @@ if (gamepadFound) {
     return;
 }
 `;
-            }
 
             funcStr = funcStr.replace(text, newCode + text);
             return funcStr;
@@ -8077,7 +8088,7 @@ if (gamepadFound) {
 
         ['playVibration'],
         HAS_TOUCH_SUPPORT && getPref(Preferences.STREAM_TOUCH_CONTROLLER) === 'all' && ['exposeTouchLayoutManager'],
-        HAS_TOUCH_SUPPORT && (getPref(Preferences.STREAM_TOUCH_CONTROLLER) === 'off' || getPref(Preferences.STREAM_TOUCH_CONTROLLER_AUTO_OFF)) && ['disableTakRenderer'],
+        HAS_TOUCH_SUPPORT && getPref(Preferences.STREAM_TOUCH_CONTROLLER_AUTO_OFF) && ['disableTakRenderer'],
 
         ENABLE_XCLOUD_LOGGER && ['enableConsoleLogging'],
 
@@ -8234,7 +8245,7 @@ function checkForUpdate() {
 
     // Start checking
     setPref(Preferences.LAST_UPDATE_CHECK, now);
-    fetch('https://api.github.com/repos/redphx/better-xcloud/releases/latest')
+    fetch('https://api.github.com/repos/casperemo/pro-xcloud/releases/latest')
         .then(response => response.json())
         .then(json => {
             // Store the latest version
@@ -10241,13 +10252,13 @@ function injectSettingsButton($parent) {
                                 'class': 'bx-settings-title',
                                 'href': SCRIPT_HOME,
                                 'target': '_blank',
-                           }, 'Better xCloud ' + SCRIPT_VERSION),
+                           }, 'Pro xCloud '),
                            createButton({icon: Icon.QUESTION, label: t('help'), url: 'https://better-xcloud.github.io/features/'}),
                         )
                        );
     $updateAvailable = CE('a', {
         'class': 'bx-settings-update bx-gone',
-        'href': 'https://github.com/redphx/better-xcloud/releases',
+        'href': 'https://github.com/casperemo/better-xcloud/releases',
         'target': '_blank',
     });
 
@@ -11479,7 +11490,7 @@ window.addEventListener(BxEvent.STREAM_LOADING, e => {
 
 window.addEventListener(BxEvent.STREAM_STARTING, e => {
     // Hide loading screen
-    LoadingScreen.hide();
+    getPref(Preferences.UI_LOADING_SCREEN_GAME_ART) && LoadingScreen.hide();
 });
 
 window.addEventListener(BxEvent.STREAM_PLAYING, e => {
