@@ -5,6 +5,7 @@
       "name": "arcade layout",
       "content": {
         "right": {
+          "inner": [
           "type": "arcadeButtons",
           "lightPunch": {
             "action": "gamepadX",
@@ -72,6 +73,7 @@
               }
             }
           }
+          ]
         },
         "left": {
           "inner": [
