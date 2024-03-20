@@ -6,73 +6,75 @@
       "content": {
         "right": {
           "inner": [
-          "type": "arcadeButtons",
-          "lightPunch": {
-            "action": "gamepadX",
-            "styles": {
-              "default": {
-                "faceImage": {
-                  "type": "icon",
-                  "value": "lightPunch"
+            {
+              "type": "arcadeButtons",
+              "lightPunch": {
+                "action": "gamepadX",
+                "styles": {
+                  "default": {
+                    "faceImage": {
+                      "type": "icon",
+                      "value": "lightPunch"
+                    }
+                  }
+                }
+              },
+              "mediumPunch": {
+                "action": "gamepadY",
+                "styles": {
+                  "default": {
+                    "faceImage": {
+                      "type": "icon",
+                      "value": "mediumPunch"
+                    }
+                  }
+                }
+              },
+              "heavyPunch": {
+                "action": "rightTrigger",
+                "styles": {
+                  "default": {
+                    "faceImage": {
+                      "type": "icon",
+                      "value": "heavyPunch"
+                    }
+                  }
+                }
+              },
+              "lightKick": {
+                "action": "gamepadA",
+                "styles": {
+                  "default": {
+                    "faceImage": {
+                      "type": "icon",
+                      "value": "lightKick"
+                    }
+                  }
+                }
+              },
+              "mediumKick": {
+                "action": "gamepadB",
+                "styles": {
+                  "default": {
+                    "faceImage": {
+                      "type": "icon",
+                      "value": "mediumKick"
+                    }
+                  }
+                }
+              },
+              "heavyKick": {
+                "action": "leftTrigger",
+                "styles": {
+                  "default": {
+                    "faceImage": {
+                      "type": "icon",
+                      "value": "heavyKick"
+                    }
+                  }
                 }
               }
             }
-          },
-          "mediumPunch": {
-            "action": "gamepadY",
-            "styles": {
-              "default": {
-                "faceImage": {
-                  "type": "icon",
-                  "value": "mediumPunch"
-                }
-              }
-            }
-          },
-          "heavyPunch": {
-            "action": "rightTrigger",
-            "styles": {
-              "default": {
-                "faceImage": {
-                  "type": "icon",
-                  "value": "heavyPunch"
-                }
-              }
-            }
-          },
-          "lightKick": {
-            "action": "gamepadA",
-            "styles": {
-              "default": {
-                "faceImage": {
-                  "type": "icon",
-                  "value": "lightKick"
-                }
-              }
-            }
-          },
-          "mediumKick": {
-            "action": "gamepadB",
-            "styles": {
-              "default": {
-                "faceImage": {
-                  "type": "icon",
-                  "value": "mediumKick"
-                }
-              }
-            }
-          },
-          "heavyKick": {
-            "action": "leftTrigger",
-            "styles": {
-              "default": {
-                "faceImage": {
-                  "type": "icon",
-                  "value": "heavyKick"
-                }
-              }
-            }
-          }
           ]
         },
         "left": {
@@ -93,5 +95,4 @@
       }
     }
   }
-              }
-                
+}
