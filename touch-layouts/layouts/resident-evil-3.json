@@ -45,11 +45,19 @@
           "outer": [
             {
               "type": "button",
-              "action": "rightTrigger"
+              "action": "rightTrigger",
+              "styles": {
+                "default": {
+                  "faceImage": {
+                    "type": "icon",
+                    "value": "roll"
+                  }
+                }
+              }
             },
             {
               "type": "directionalPad",
-              "scale": 2.0,
+              "scale": 1.0,
               "styles": {
                 "default": {
                   "fill": "#0e7a0d10",
@@ -207,4 +215,5 @@
     }
   }
             }
-            
+
+                  
