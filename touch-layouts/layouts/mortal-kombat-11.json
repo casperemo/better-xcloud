@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "layouts": {
+    "mk11": {
+      "name": "arcade layout",
+      "content": {
+        "right": {
+          "type": "arcadeButtons",
+          "lightPunch": {
+            "action": "gamepadX",
+            "styles": {
+              "default": {
+                "faceImage": {
+                  "type": "icon",
+                  "value": "lightPunch"
+                }
+              }
+            }
+          },
+          "mediumPunch": {
+            "action": "gamepadY",
+            "styles": {
+              "default": {
+                "faceImage": {
+                  "type": "icon",
+                  "value": "mediumPunch"
+                }
+              }
+            }
+          },
+          "heavyPunch": {
+            "action": "rightTrigger",
+            "styles": {
+              "default": {
+                "faceImage": {
+                  "type": "icon",
+                  "value": "heavyPunch"
+                }
+              }
+            }
+          },
+          "lightKick": {
+            "action": "gamepadA",
+            "styles": {
+              "default": {
+                "faceImage": {
+                  "type": "icon",
+                  "value": "lightKick"
+                }
+              }
+            }
+          },
+          "mediumKick": {
+            "action": "gamepadB",
+            "styles": {
+              "default": {
+                "faceImage": {
+                  "type": "icon",
+                  "value": "mediumKick"
+                }
+              }
+            }
+          },
+          "heavyKick": {
+            "action": "leftTrigger",
+            "styles": {
+              "default": {
+                "faceImage": {
+                  "type": "icon",
+                  "value": "heavyKick"
+                }
+              }
+            }
+          }
+        },
+        "left": {
+          "inner": [
+            {
+              "type": "joystick",
+              "axis": {
+                "input": "axisXY",
+                "output": "leftJoystick",
+                "deadzone": {
+                  "threshold": 0.05,
+                  "radial": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+              }
+                
