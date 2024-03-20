@@ -91,7 +91,19 @@
               }
             }
           ]
-        }
+        },
+        "upper": {
+          "right": [
+            {
+              "type": "button",
+              "action": "menu"
+            },
+            {
+              "type": "button",
+              "action": "view"
+            }
+            ]
+            }
       }
     }
   }
