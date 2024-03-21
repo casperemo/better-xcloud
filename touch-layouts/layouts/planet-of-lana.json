@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "layouts": {
+    "planet-of-lana": {
+      "name": "Layout 1",
+      "content": {
+        "left": {
+          "inner": [
+            {
+              "type": "joystick",
+              "axis": {
+                "input": "axisXY",
+                "output": "leftJoystick",
+                "deadzone": {
+                  "threshold": 0.05,
+                  "radial": true
+                }
+              }
+            }
+          ]
+        },
+        "right": {
+          "inner": [
+            {
+              "type": "button",
+              "action": "leftTrigger",
+              "styles": {
+                "default": {
+                  "faceImage": {
+                    "type": "icon",
+                    "value": "crouch"
+                  }
+                }
+              }
+            }
+          ],
+          "outer": [
+            {
+              "type": "blank"
+            },
+            {
+              "type": "button",
+              "action": "gamepadY",
+              "styles": {
+                "default": {
+                  "faceImage": {
+                    "type": "icon",
+                    "value": ""
+                  }
+                }
+              }
+            },
+            {
+              "type": "button",
+              "action": "gamepadB",
+              "styles": {
+                "default": {
+                  "faceImage": {
+                    "type": "icon",
+                    "value": ""
+                  }
+                }
+              }
+            },
+            {
+              "type": "blank"
+            },
+            {
+              "type": "button",
+              "action": "gamepadA",
+              "styles": {
+                "default": {
+                  "faceImage": {
+                    "type": "icon",
+                    "value": ""
+                  }
+                }
+              }
+            },
+            {
+              "type": "button",
+              "action": "gamepadX",
+              "styles": {
+                "default": {
+                  "faceImage": {
+                    "type": "icon",
+                    "value": ""
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "upper": {
+          "right": [
+            {
+              "type": "button",
+              "action": "menu"
+            },
+            {
+              "type": "button",
+              "action": "view"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
