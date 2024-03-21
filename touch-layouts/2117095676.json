@@ -1,0 +1,7 @@
+{
+  "name": "GAME NAME",
+  "default_layout": "planet-of-lana",
+  "layouts": [
+    "planet-of-lana"
+  ]
+}
