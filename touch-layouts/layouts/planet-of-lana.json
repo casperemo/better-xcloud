@@ -17,6 +17,31 @@
                 }
               }
             }
+          ],
+          "outer": [
+            {
+              "type": "joystick",
+              "axis": [
+                {
+                  "input": "axisXY",
+                  "output": "leftJoystick"
+                }
+              ],
+              "action": "rightTrigger",
+              "styles": {
+                "default": {
+                  "knob": {
+                    "faceImage": {
+                      "type": "icon",
+                      "value": "waypoint"
+                    },
+                    "stroke": {
+                      "opacity": 0.1
+                    }
+                  }
+                }
+              }
+            }
           ]
         },
         "right": {
@@ -45,7 +70,7 @@
                 "default": {
                   "faceImage": {
                     "type": "icon",
-                    "value": ""
+                    "value": "lookBehind"
                   }
                 }
               }
@@ -57,7 +82,7 @@
                 "default": {
                   "faceImage": {
                     "type": "icon",
-                    "value": ""
+                    "value": "team"
                   }
                 }
               }
@@ -72,7 +97,7 @@
                 "default": {
                   "faceImage": {
                     "type": "icon",
-                    "value": ""
+                    "value": "jump"
                   }
                 }
               }
@@ -84,7 +109,7 @@
                 "default": {
                   "faceImage": {
                     "type": "icon",
-                    "value": ""
+                    "value": "interact"
                   }
                 }
               }
@@ -106,4 +131,5 @@
       }
     }
   }
-}
+            }
+            
